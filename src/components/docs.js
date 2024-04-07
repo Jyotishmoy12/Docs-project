@@ -4,6 +4,9 @@ import { addDoc, collection, doc, onSnapshot, deleteDoc } from 'firebase/firesto
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { auth } from "./firebaseConfig";
+
+// Import CSS file for styles
 
 export default function Docs({ database }) {
     const [open, setOpen] = useState(false);
@@ -13,6 +16,15 @@ export default function Docs({ database }) {
     const isMounted = useRef();
     const [docsData, setDocsData] = useState([]);
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        auth.signOut().then(() => {
+            navigate('/login');
+        }).catch((error) => {
+            console.error('Error signing out: ', error);
+            toast.error('Failed to log out', { autoClose: 2000 });
+        });
+    };
 
     const addData = () => {
         addDoc(collectionRef, { title: title })
@@ -60,16 +72,17 @@ export default function Docs({ database }) {
     return (
         <div className="docs-main">
             <ToastContainer />
-            <h1>Docs</h1>
-            <button className="add-docs" onClick={handleOpen}>
-                Add a Document
-            </button>
+            <div className="header">
+                <h1 className="docs-heading">Docs</h1>
+                <button className="add-docs" onClick={handleOpen}>Add a Document</button>
+                <button className="logout" onClick={handleLogout}>Logout</button>
+            </div>
             <Modal
                 open={open}
                 setOpen={setOpen}
                 title={title}
                 setTitle={setTitle}
-                addData={addData} // Pass the addData function as a prop
+                addData={addData}
             />
             {docsData.length === 0 ? (
                 <p>Loading...</p>

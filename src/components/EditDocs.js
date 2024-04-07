@@ -5,62 +5,43 @@ import 'react-quill/dist/quill.snow.css';
 import { updateDoc, collection, doc, onSnapshot } from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getFirestore } from 'firebase/firestore';
 
 export default function EditDocs({ database }) {
     const isMounted = useRef();
-    const collectionRef = collection(database, 'docsData');
+    const db = getFirestore();
+    const collectionRef = collection(db, 'docsData');
     let params = useParams();
     const [documentTitle, setDocumentTitle] = useState('');
     const [docsDesc, setDocsDesc] = useState('');
 
-    const getQuillData = (value) => {
-        setDocsDesc(value);
-    };
     useEffect(() => {
-      const updateDocsData = setTimeout(() => {
-          const document = doc(collectionRef, params.id)
-          updateDoc(document, {
-              docsDesc: docsDesc
-          })
-              .then(() => {
-                toast.success('Document Saved', {
-                  autoClose: 2000
-              })
-              })
-              .catch(() => {
-                toast.error('Cannot Save Document', {
-                  autoClose: 2000
-              })
-              })
-      }, 1000)
-      return () => clearTimeout(updateDocsData)
-  }, [docsDesc])
-    const getData = () => {
-        const document = doc(collectionRef, params.id);
-        onSnapshot(document, (docs) => {
-            if (docs && docs.exists()) { // Check if docs is not undefined and exists
-                const data = docs.data();
-                setDocumentTitle(data.title || ''); // Set title to empty string if it's undefined
+        const unsubscribe = onSnapshot(doc(collectionRef, params.id), (doc) => {
+            if (doc.exists()) {
+                const data = doc.data();
+                setDocumentTitle(data.title || '');
                 setDocsDesc(data.docsDesc || '');
             } else {
                 console.log("Document does not exist or data is undefined");
-                // Handle the case where the document does not exist, e.g., navigate to a not found page
             }
         });
+
+        return () => unsubscribe();
+    }, [collectionRef, params.id]);
+
+    const getQuillData = (value) => {
+        updateDoc(doc(collectionRef, params.id), { docsDesc: value })
+            .then(() => {
+                toast.success('Document Saved', { autoClose: 2000 });
+            })
+            .catch(() => {
+                toast.error('Cannot Save Document', { autoClose: 2000 });
+            });
     };
-
-    useEffect(() => {
-        if (isMounted.current) {
-            return;
-        }
-
-        isMounted.current = true;
-        getData();
-    }, []);
 
     return (
         <div className='editDocs-main'>
-          <ToastContainer />
+            <ToastContainer />
             <h1>{documentTitle}</h1>
             <div className='editDocs-inner'>
                 <ReactQuill

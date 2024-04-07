@@ -1,11 +1,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
-.docs-main{
+/* .docs-main{
   text-align: center;
   font-family: 'Roboto', sans-serif;
   
+} */
+.docs-main {
+  padding: 20px;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.docs-heading {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333; /* Dark gray color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow effect */
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
 .add-docs{
   height: 40px;
   width: 200px;
@@ -13,6 +35,15 @@
   border: none;
   cursor: pointer;
   margin-right: 30px;
+}
+.add-docs, .logout {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .add-input{
@@ -95,4 +126,24 @@
 
 .button-container-grid button:hover {
   background-color: #0056b3; /* Change background color on hover */
+}
+
+
+.logout {
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+.logout:hover {
+  background-color: #d32f2f; /* Darker red */
 }
