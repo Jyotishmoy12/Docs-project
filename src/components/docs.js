@@ -84,7 +84,7 @@ export default function Docs({ database }) {
         <div className="docs-main">
             <ToastContainer />
             <div className="header">
-                <h1 className="docs-heading">Docs</h1>
+                <h1 className="docs-heading">JDocs</h1>
                 <button className="add-docs" onClick={handleOpen}>Add a Document</button>
                 <button className="logout" onClick={handleLogout}>Logout</button>
             </div>
