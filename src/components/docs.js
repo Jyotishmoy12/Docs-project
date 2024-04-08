@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Modal from './Modal';
 import { addDoc, collection, doc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from "./firebaseConfig";
+import Modal from './Modal';
 
 // Import CSS file for styles
 
@@ -69,6 +69,17 @@ export default function Docs({ database }) {
         navigate(`/editDocs/${id}`);
     };
 
+    // Check if user is authenticated, redirect to login if not
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (!user) {
+                navigate('/login');
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     return (
         <div className="docs-main">
             <ToastContainer />
@@ -93,8 +104,8 @@ export default function Docs({ database }) {
                             <div className='grid-child' key={doc.id}>
                                 <p>{doc.title}</p>
                                 <div className='button-container-grid'>
-                                    <button onClick={() => handleDelete(doc.id)}>Delete</button>
-                                    <button onClick={() => getID(doc.id)}>Edit</button>
+                                    <button className="delete-button" onClick={() => handleDelete(doc.id)}>Delete</button>
+                                    <button className="edit-button" onClick={() => getID(doc.id)}>Edit</button>
                                 </div>
                             </div>
                         );

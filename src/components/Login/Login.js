@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth"; // Import useAuthState
+import { auth } from "../firebaseConfig";
 
 import InputControl from "../InputControl/InputControl";
-import { auth } from "../firebaseConfig";
 
 import styles from "./Login.module.css";
 
@@ -15,6 +16,7 @@ function Login() {
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+  const [user] = useAuthState(auth); // Get the current user's authentication state
 
   const handleSubmission = () => {
     if (!values.email || !values.pass) {
@@ -27,7 +29,6 @@ function Login() {
     signInWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
         setSubmitButtonDisabled(false);
-        
         navigate("/");
       })
       .catch((err) => {
@@ -35,6 +36,12 @@ function Login() {
         setErrorMsg(err.message);
       });
   };
+
+  // Redirect to documents page if user is already authenticated
+  if (user) {
+    navigate("/");
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.innerBox}>
@@ -61,7 +68,7 @@ function Login() {
             Login
           </button>
           <p>
-            Already have an account?{" "}
+            Not registered?{" "}
             <span>
               <Link to="/signup">Sign up</Link>
             </span>

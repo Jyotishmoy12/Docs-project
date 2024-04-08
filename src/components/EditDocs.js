@@ -29,15 +29,23 @@ export default function EditDocs({ database }) {
         return () => unsubscribe();
     }, [collectionRef, params.id]);
 
-    const getQuillData = (value) => {
-        updateDoc(doc(collectionRef, params.id), { docsDesc: value })
-            .then(() => {
-                toast.success('Document Saved', { autoClose: 2000 });
-            })
-            .catch(() => {
-                toast.error('Cannot Save Document', { autoClose: 2000 });
-            });
-    };
+    const getQuillData = (() => {
+        let timeoutId;
+    
+        return (value) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                updateDoc(doc(collectionRef, params.id), { docsDesc: value })
+                    .then(() => {
+                        toast.success('Document Saved', { autoClose: 2000 });
+                    })
+                    .catch(() => {
+                        toast.error('Cannot Save Document', { autoClose: 2000 });
+                    });
+            }, 3000); // Delay saving for 3 seconds
+        };
+    })();
+    
 
     return (
         <div className='editDocs-main'>

@@ -55,6 +55,39 @@
   padding: 10px;
   font-family: 'Poppins', sans-serif;
 }
+
+@media screen and (max-width: 768px) {
+  .header>.docs-heading {
+    font-size: 15px;
+    text-align: left;
+    padding-right: 50px;
+    margin-right: 30px;
+  }
+  .add-docs{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    
+  }
+  .logout{
+    width: 100%;
+    height: 100%;
+  }
+  .button-container-grid{
+    width: 100px;
+  }
+  .add-input{
+      width: 100px;
+      height: 30px;
+      margin-left:130px;
+      text-align: center;
+      list-style: none;
+  }
+  .add-docs{
+    width: 200px;
+  }
+}
+
 .button-container{
   text-align: center;
   margin: 30px;
@@ -74,13 +107,46 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: rgba(27, 24, 24, 0.45);
+  background-color: rgba(42, 39, 39, 0.45);
   width: 300px;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   transition: background-color 0.3s;
 }
+@media screen and (max-width: 768px) {
+  .grid-main {
+    display: flex;
+    flex-direction: column; /* Display documents in a single column */
+    align-items: center; /* Center documents horizontally */
+  }
+  .grid-child {
+    width: 50%;
+    margin: 10px auto; /* Add margin to separate documents */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(42, 39, 39, 0.45);
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s;
+  }
+
+  .delete-button,
+  .edit-button {
+    width: 45%; /* Adjusted width for small screens */
+    margin-left: 0; /* Remove left margin */
+    margin-bottom: 0; /* Remove bottom margin */
+    display: flex; /* Add flex display */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    font-size: 10px;
+  }
+}
+
 
 .grid-child:hover {
   background-color: rgba(98, 98, 98, 1);
@@ -109,6 +175,17 @@
   border: none !important;
 }
 
+@media only screen and (max-width: 768px){
+  .editDocs-main {
+    padding: 10px; /* Adjusted padding for smaller screens */
+  }
+
+  .editDocs-inner {
+    padding: 10px; /* Adjusted padding for smaller screens */
+    height: 400px; /* Adjusted height for smaller screens */
+    width: 200px;
+  }
+}
 /* Define styles for the buttons */
 .button-container-grid {
   display: flex;
