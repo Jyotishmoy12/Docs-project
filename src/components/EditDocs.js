@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore } from 'firebase/firestore';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import PDFDocument from './PDFDocument'; // import your PDFDocument component
+import PDFDocument from './PDFDocument'; 
 
 export default function EditDocs({ database }) {
     const isMounted = useRef();
