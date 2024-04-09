@@ -6,6 +6,8 @@ import { updateDoc, collection, doc, onSnapshot } from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore } from 'firebase/firestore';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PDFDocument from './PDFDocument'; // import your PDFDocument component
 
 export default function EditDocs({ database }) {
     const isMounted = useRef();
@@ -45,7 +47,6 @@ export default function EditDocs({ database }) {
             }, 3000); // Delay saving for 3 seconds
         };
     })();
-    
 
     return (
         <div className='editDocs-main'>
@@ -56,8 +57,12 @@ export default function EditDocs({ database }) {
                     className='react-quill'
                     value={docsDesc}
                     onChange={getQuillData}
+                    style={{ width: '100%' }}
                 />
             </div>
+            <PDFDownloadLink document={<PDFDocument content={docsDesc} />} fileName="document.pdf">
+                {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
+            </PDFDownloadLink>
         </div>
     );
 }
