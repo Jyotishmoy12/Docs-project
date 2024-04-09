@@ -5,13 +5,11 @@ import { Routes, Route } from "react-router-dom";
 import { app, database } from './components/firebaseConfig';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import Home from './components/Home/Home';
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>} />
-      <Route path="/Home" element={<Home/>}/>
       <Route path="/" element={<Docs database={database} />} />
       <Route path="/editDocs/:id" element={<EditDocs database={database}/>} />
       
