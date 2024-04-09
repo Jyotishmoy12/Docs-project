@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
@@ -39,6 +39,17 @@ function Signup() {
         setErrorMsg(err.message);
       });
   };
+
+  // Check if user is authenticated, redirect to docs page if already authenticated
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className={styles.container}>
