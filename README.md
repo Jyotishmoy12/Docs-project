@@ -1,15 +1,19 @@
 
 <h1>JDOCS</h1>
-Developed a cutting-edge real-time document management system, meticulously crafted for effortless document
-creation and deletion. Leveraging Firebase technology, the system boasts robust user authentication, ensuring
-comprehensive security measures. Documents are stored efficiently within the Firestore database, guaranteeing seamless
-access and management. Users are empowered with unparalleled control, effortlessly accessing, modifying, and deleting
-documents, whether authored by themselves or others. Collaborators benefit from real-time visibility of each other’s
-cursors, fostering synchronous editing experiences. Document editing capabilities are enriched through the integration of
-React Quill, providing a dynamic and intuitive platform. To enhance user engagement, informative notifications are
-intelligently delivered via React Toastify, ensuring users stay informed throughout their interactions with the system.
-Furthermore, the system facilitates document download in PDF format, offering users flexibility and convenience in
-accessing their creations.
+• Developed a cutting-edge real-time document management system for effortless document creation and
+deletion.
+<br/>
+• Leveraged Firebase for robust user authentication and efficient document storage in the Firestore
+database.
+<br/>
+• Enabled seamless document access, modification, and deletion, empowering users with comprehensive
+control.
+<br/>
+• Fostered synchronous editing experiences with real-time visibility of collaborators cursors and dynamic
+document editing using React Quill.
+<br/>
+• Enhanced user engagement with informative notifications via React Toastify and facilitated document
+download in PDF format for flexibility and convenience.
 
 ![Screenshot (164)](https://github.com/Jyotishmoy12/Docs-project/assets/93263133/fddfda44-13a8-4faa-ade1-5c1be79e2bd8)
 
